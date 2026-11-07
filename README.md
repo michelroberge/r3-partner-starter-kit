@@ -102,3 +102,4 @@ Once it's yours: follow
 [`docs/partner-module-submission.md`](https://github.com/michelroberge/r3-platform/blob/main/docs/partner-module-submission.md)
 from step 3 onward (self-check → pack → submit). Steps 1–2 (scaffold, develop
 against the SDK surface contract) are already done for you by this fork.
+
