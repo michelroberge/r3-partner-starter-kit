@@ -1,0 +1,19 @@
+{
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "No bookmarks yet",
+    "menu": {
+      "title": "Bookmarks"
+    },
+    "fields": {
+      "name": "Name",
+      "url": "URL",
+      "createdAt": "Created",
+      "updatedAt": "Updated"
+    },
+    "confirmDelete": "Are you sure you want to delete \"{{name}}\"?",
+    "errors": {
+      "loadFailed": "Failed to load bookmarks"
+    }
+  }
+}

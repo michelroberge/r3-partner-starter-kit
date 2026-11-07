@@ -1,0 +1,51 @@
+name: CI
+
+# Runs against the *published* @r3/* packages only (this repo's own
+# `.npmrc` points @r3/@r3m at the registry — see README.md). No step here
+# reads or references the r3-platform source tree, and no step restores a
+# cache of someone else's node_modules: `npm ci` always installs fresh from
+# the registry, exactly what a reviewer's own clean checkout would do.
+#
+# "Fast checks on every push, --build at minimum on PRs" (the partner
+# review policy is explicit that fast-checks-only CI must not be mistaken
+# for a full review — see docs/partner-module-review-policy.md in the
+# r3-platform repo, linked from this kit's README) is encoded as two jobs:
+# `fast` always runs; `build` (the slow sandboxed rebuild) only runs on
+# pull_request, so every push gets quick feedback and every PR gets the
+# real thing.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  fast:
+    name: Fast checks (manifest, SDK surface, typecheck, tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.15'
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npx vitest run
+      - run: npx r3 verify .
+
+  build:
+    name: Sandboxed build + pack (PRs only)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.15'
+      - run: npm ci
+      - name: r3 verify --build
+        run: npx r3 verify . --build
+      - name: r3 pack
+        run: npx r3 pack .
+      - name: r3 verify the packed tarball
+        run: npx r3 verify dist/r3m/*.tgz --build

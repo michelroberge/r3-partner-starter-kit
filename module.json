@@ -1,0 +1,68 @@
+{
+  "id": "bookmarks",
+  "name": "Bookmarks",
+  "description": "A shared library of saved links: tenant members save, tag, and browse bookmarks in one place.",
+  "version": "1.0.0",
+  "publisher": {
+    "name": "Your Company Name",
+    "url": "https://example.com",
+    "contact": "support@example.com"
+  },
+  "trustLevel": "community",
+  "r3Compat": "^2.1.4",
+  "agentHints": {
+    "editablePaths": [
+      "**"
+    ],
+    "verifyCommand": "npx tsc --noEmit",
+    "testCommand": "npx vitest run",
+    "invariants": [
+      "Every bookmark is tenant-scoped; there is no cross-tenant read or write.",
+      "This module has no cross-module `dependencies` and touches no entity it doesn't declare in `entities` — keep it that way; it's the worked example for a self-contained submission."
+    ]
+  },
+  "category": "productivity",
+  "entities": [
+    "bookmarks"
+  ],
+  "backend": {
+    "modulePath": "./backend/src/index",
+    "moduleName": "BookmarksModule"
+  },
+  "frontend": {
+    "modulePath": "./frontend/src/modules/bookmarks-frontend.module",
+    "moduleName": "bookmarksFrontendModule"
+  },
+  "featureFlags": [
+    {
+      "key": "bookmarks.enabled",
+      "name": "Bookmarks Module",
+      "description": "Enable Bookmarks functionality",
+      "category": "productivity",
+      "scope": "tenant",
+      "default": false
+    }
+  ],
+  "permissions": [
+    {
+      "name": "bookmarks.view",
+      "category": "bookmarks",
+      "description": "View Bookmarks"
+    },
+    {
+      "name": "bookmarks.create",
+      "category": "bookmarks",
+      "description": "Create Bookmarks"
+    },
+    {
+      "name": "bookmarks.update",
+      "category": "bookmarks",
+      "description": "Update Bookmarks"
+    },
+    {
+      "name": "bookmarks.delete",
+      "category": "bookmarks",
+      "description": "Delete Bookmarks"
+    }
+  ]
+}

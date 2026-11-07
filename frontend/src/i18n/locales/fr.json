@@ -1,0 +1,19 @@
+{
+  "bookmarks": {
+    "title": "Bookmarks",
+    "empty": "Aucun élément pour le moment",
+    "menu": {
+      "title": "Bookmarks"
+    },
+    "fields": {
+      "name": "Nom",
+      "url": "URL",
+      "createdAt": "Créé le",
+      "updatedAt": "Modifié le"
+    },
+    "confirmDelete": "Voulez-vous vraiment supprimer « {{name}} » ?",
+    "errors": {
+      "loadFailed": "Échec du chargement"
+    }
+  }
+}
