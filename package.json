@@ -12,8 +12,10 @@
   "dependencies": {},
   "devDependencies": {
     "@r3/scripts": "^2.1.4",
+    "@vitejs/plugin-react": "^6.1.2",
     "reflect-metadata": "^0.2.2",
     "typescript": "^6.0.3",
+    "vite": "^8.3.5",
     "vitest": "^5.0.5"
   },
   "peerDependencies": {
